@@ -1,0 +1,35 @@
+// Tabla Clientes
+Table Clientes {
+  ClienteID number [pk]
+  Nombre varchar2(50)
+  Ciudad varchar2(50)
+  FechaNacimiento date
+}
+
+// Tabla Pedidos
+Table Pedidos {
+  PedidoID number [pk]
+  ClienteID number
+  Total number
+  FechaPedido date
+}
+
+// Tabla Productos
+Table Productos {
+  ProductoID number [pk]
+  Nombre varchar2(50)
+  Precio number
+}
+
+// Tabla DetallesPedidos
+Table DetallesPedidos {
+  DetalleID number [pk]
+  PedidoID number
+  ProductoID number
+  Cantidad number
+}
+
+// Relaciones (Llaves Foráneas)
+Ref fk_pedido_cliente: Pedidos.ClienteID > Clientes.ClienteID
+Ref fk_detalle_pedido: DetallesPedidos.PedidoID > Pedidos.PedidoID
+Ref fk_detalle_producto: DetallesPedidos.ProductoID > Productos.ProductoID
