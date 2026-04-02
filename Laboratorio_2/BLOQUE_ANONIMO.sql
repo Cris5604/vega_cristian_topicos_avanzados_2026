@@ -3,6 +3,11 @@
 -- Detener la ejecución si ocurre un error
 WHENEVER SQLERROR EXIT SQL.SQLCODE;
 
+
+--- EL BLOQUE ANONIMO SE ENCUENTRA AL FINAL
+
+
+
 -- Cambiar al PDB XEPDB1
 ALTER SESSION SET CONTAINER = XEPDB1;
 
