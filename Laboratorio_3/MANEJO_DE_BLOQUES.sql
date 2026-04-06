@@ -175,3 +175,20 @@ EXCEPTION
 END;
 /
 
+--- Manejo de Bloques 2
+--- -Duplicacion
+DECLARE 
+    unique_violation EXCEPTION;
+    PRAGMA EXCEPTION_INIT(unique_violation, -8001);
+BEGIN 
+    INSERT INTO Clientes(ClienteID, Nombre, Ciudad, FechaNacimiento)
+    VALUES (1, 'Rosio Verdugo', 'Santiago', TO_DATE('1992-02-27', 'YYYY-MM-DD')); --- ClienteID ocupado
+    DBMS_OUTPUT.PUT_LINE('Cliente insertado correctamente.');
+EXCEPTION
+    WHEN unique_violation THEN 
+    DBMS_OUTPUT.PUT_LINE('Error TimesTen: Violación de clave única (TT8001).');
+    WHEN OTHERS THEN
+    DBMS_OUTPUT.PUT_LINE('Error inesperado: ' || SQLERRM);
+END;
+/
+
