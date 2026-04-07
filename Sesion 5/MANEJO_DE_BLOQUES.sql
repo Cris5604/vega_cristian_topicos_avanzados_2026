@@ -191,4 +191,33 @@ BEGIN
 
 END;
 /
-
+--- Sesion 5, requisito 2
+DECLARE
+    CURSOR c_producto(p_id NUMBER) IS
+        SELECT ProductoID, Nombre, Precio
+        FROM Productos
+        WHERE ProductoID = p_id
+        FOR UPDATE OF Precio;
+    v_id              Productos.ProductoID%TYPE;
+    v_precio_original Productos.Precio%TYPE;
+    v_precio_nuevo    Productos.Precio%TYPE;
+BEGIN
+    OPEN c_producto(v_id);   
+    LOOP
+        FETCH c_producto INTO v_id, v_precio_original;
+        EXIT WHEN c_producto%NOTFOUND;
+      
+        v_precio_nuevo := v_precio_original * 1.10;
+        
+        UPDATE Productos
+        SET Precio = v_precio_nuevo
+        WHERE CURRENT OF c_producto;
+        
+        DBMS_OUTPUT.PUT_LINE('Actualización de Producto');
+        DBMS_OUTPUT.PUT_LINE('ID del Producto:' || v_id);
+        DBMS_OUTPUT.PUT_LINE('Precio Original:' || v_precio_original);
+        DBMS_OUTPUT.PUT_LINE('Nuevo Precio:' || v_precio_nuevo);
+    END LOOP;
+    CLOSE c_producto;
+END;
+/
