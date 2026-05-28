@@ -141,7 +141,10 @@ SELECT * FROM DetallesPedidos;
 COMMIT;
 
 
--- Sesion 11: Actividad Pracica 1
+-- Sesion 11 EJERCICIOS DE FUNCIONES ALMACENADAS: Actividad Pracica 1
+-- Crea una función calcular_edad_cliente que reciba un ClienteID (parámetro IN) y devuelva 
+-- la edad del cliente en años (basado en FechaNacimiento). Maneja excepciones si el cliente no existe.
+
 CREATE OR REPLACE FUNCTION calcular_edad_cliente(p_id_cliente IN NUMBER) RETURN NUMBER AS
 	v_fecha_nacimiento DATE;
 	v_edad NUMBER;
